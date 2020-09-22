@@ -38,7 +38,8 @@ public class Main implements Runnable {
     }
 
     /**
-     * This controls the logic for
+     * This controls the logic for the sim
+     * TODO: add more detailed commenting
      */
     public void runSim(){
         int[][] nextGrid = new int[80][80];

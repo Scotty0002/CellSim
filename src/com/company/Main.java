@@ -22,12 +22,18 @@ public class Main implements Runnable {
     public void run() {
         while(true) {
             Point newCell = gui.mousePoint();
-            if(newCell != null && !running) {
+            if(newCell != null) {
                 grid[newCell.x][newCell.y] = 1;
             }else if(running) {
                this.runSim();
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             gui.repaint();
+
         }
     }
 

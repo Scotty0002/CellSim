@@ -32,7 +32,9 @@ public class gui extends JFrame{
         this.addMouseMotionListener(new mouseMove());
         this.addMouseListener(new mouseClick());
 
+
     }
+
     public Point mousePoint(){
         for(int i = 0; i<80; i++){
             for(int j = 0; j<80; j++){

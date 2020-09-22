@@ -7,17 +7,19 @@ import java.awt.event.ActionListener;
 public class Main implements Runnable {
 
 
-    public static int[][] grid = new int[80][80];
-    private final gui gui = new gui();
+    public int[][] grid = new int[80][80];
+    private static com.company.gui gui;
     private static Boolean running = false;
 
     public static void main(String[] args){
-        new Thread(new Main()).start();
+        gui = new gui();
+        Main m = new Main();
+        gui.setMain(m);
+        new Thread(m).start();
     }
 
     @Override
     public void run() {
-
         while(true) {
             Point newCell = gui.mousePoint();
             if(newCell != null && !running) {
@@ -40,45 +42,45 @@ public class Main implements Runnable {
                if(i == 0 && j == 0){ //Top left corner condition
                     int current = grid[i][j];
                     int cellCount = 0;
-                    if(grid[i+1][j] > 1){ cellCount++;}
-                    if(grid[i+1][j+1] > 1){ cellCount++;}
-                    if(grid[i][j+1] > 1){ cellCount++;}
+                    if(grid[i+1][j] >= 1){ cellCount++;}
+                    if(grid[i+1][j+1] >= 1){ cellCount++;}
+                    if(grid[i][j+1] >= 1){ cellCount++;}
 
                     if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                     else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}
                     else if(current == 1 && cellCount < 2 || cellCount > 4){ nextGrid[i][j] = 0;}
                     else{ nextGrid[i][j] = 0;}
 
-               }else if(i == 0 && j == grid.length-1){
+               }else if(i == 0 && j == grid.length-1){ //Bottom left corner
                    int current = grid[i][j];
                    int cellCount = 0;
-                   if(grid[i+1][j] > 1){ cellCount++;}
-                   if(grid[i+1][j-1] > 1){ cellCount++;}
-                   if(grid[i][j-1] > 1){ cellCount++;}
+                   if(grid[i+1][j] >= 1){ cellCount++;}
+                   if(grid[i+1][j-1] >= 1){ cellCount++;}
+                   if(grid[i][j-1] >= 1){ cellCount++;}
 
                    if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount < 2 || cellCount > 4){ nextGrid[i][j] = 0;}
                    else{ nextGrid[i][j] = 0;}
 
-               }else if(i == grid.length-1 && j == grid.length-1){
+               }else if(i == grid.length-1 && j == grid.length-1){ //Bottom right corner
                    int current = grid[i][j];
                    int cellCount = 0;
-                   if(grid[i-1][j] > 1){ cellCount++;}
-                   if(grid[i-1][j-1] > 1){ cellCount++;}
-                   if(grid[i][j-1] > 1){ cellCount++;}
+                   if(grid[i-1][j] >= 1){ cellCount++;}
+                   if(grid[i-1][j-1] >= 1){ cellCount++;}
+                   if(grid[i][j-1] >= 1){ cellCount++;}
 
                    if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount < 2 || cellCount > 4){ nextGrid[i][j] = 0;}
                    else{ nextGrid[i][j] = 0;}
 
-               }else if(i == grid.length-1 && j == 0){
+               }else if(i == grid.length-1 && j == 0){//Top left corner
                    int current = grid[i][j];
                    int cellCount = 0;
-                   if(grid[i-1][j] > 1){ cellCount++;}
-                   if(grid[i-1][j+1] > 1){ cellCount++;}
-                   if(grid[i][j+1] > 1){ cellCount++;}
+                   if(grid[i-1][j] >= 1){ cellCount++;}
+                   if(grid[i-1][j+1] >= 1){ cellCount++;}
+                   if(grid[i][j+1] >= 1){ cellCount++;}
 
                    if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}
@@ -88,11 +90,11 @@ public class Main implements Runnable {
                }else if(i == 0){
                    int current = grid[i][j];
                    int cellCount = 0;
-                   if(grid[i+1][j] > 1){ cellCount++;}
-                   if(grid[i][j+1] > 1){ cellCount++;}
-                   if(grid[i+1][j+1] > 1){ cellCount++;}
-                   if(grid[i][j-1] > 1){ cellCount++;}
-                   if(grid[i+1][j-1] > 1){ cellCount++;}
+                   if(grid[i+1][j] >= 1){ cellCount++;}
+                   if(grid[i][j+1] >= 1){ cellCount++;}
+                   if(grid[i+1][j+1] >= 1){ cellCount++;}
+                   if(grid[i][j-1] >= 1){ cellCount++;}
+                   if(grid[i+1][j-1] >= 1){ cellCount++;}
 
                    if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}
@@ -102,11 +104,11 @@ public class Main implements Runnable {
                }else if(j == 0){
                    int current = grid[i][j];
                    int cellCount = 0;
-                   if(grid[i+1][j] > 1){ cellCount++;}
-                   if(grid[i][j+1] > 1){ cellCount++;}
-                   if(grid[i+1][j+1] > 1){ cellCount++;}
-                   if(grid[i-1][j] > 1){ cellCount++;}
-                   if(grid[i-1][j+1] > 1){ cellCount++;}
+                   if(grid[i+1][j] >= 1){ cellCount++;}
+                   if(grid[i][j+1] >= 1){ cellCount++;}
+                   if(grid[i+1][j+1] >= 1){ cellCount++;}
+                   if(grid[i-1][j] >= 1){ cellCount++;}
+                   if(grid[i-1][j+1] >= 1){ cellCount++;}
 
                    if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}
@@ -116,11 +118,11 @@ public class Main implements Runnable {
                }else if(i == grid.length-1){
                    int current = grid[i][j];
                    int cellCount = 0;
-                   if(grid[i][j+1] > 1){ cellCount++;}
-                   if(grid[i][j-1] > 1){ cellCount++;}
-                   if(grid[i-1][j+1] > 1){ cellCount++;}
-                   if(grid[i-1][j-1] > 1){ cellCount++;}
-                   if(grid[i-1][j] > 1){ cellCount++;}
+                   if(grid[i][j+1] >= 1){ cellCount++;}
+                   if(grid[i][j-1] >= 1){ cellCount++;}
+                   if(grid[i-1][j+1] >= 1){ cellCount++;}
+                   if(grid[i-1][j-1] >= 1){ cellCount++;}
+                   if(grid[i-1][j] >= 1){ cellCount++;}
 
                    if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}
@@ -130,11 +132,11 @@ public class Main implements Runnable {
                }else if(j == grid.length-1){
                    int current = grid[i][j];
                    int cellCount = 0;
-                   if(grid[i+1][j] > 1){ cellCount++;}
-                   if(grid[i-1][j] > 1){ cellCount++;}
-                   if(grid[i+1][j-1] > 1){ cellCount++;}
-                   if(grid[i][j-1] > 1){ cellCount++;}
-                   if(grid[i-1][j-1] > 1){ cellCount++;}
+                   if(grid[i+1][j] >= 1){ cellCount++;}
+                   if(grid[i-1][j] >= 1){ cellCount++;}
+                   if(grid[i+1][j-1] >= 1){ cellCount++;}
+                   if(grid[i][j-1] >= 1){ cellCount++;}
+                   if(grid[i-1][j-1] >= 1){ cellCount++;}
 
                    if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}
@@ -144,14 +146,14 @@ public class Main implements Runnable {
                }else{
                    int current = grid[i][j];
                    int cellCount = 0;
-                   if(grid[i+1][j] > 1){ cellCount++;}
-                   if(grid[i][j+1] > 1){ cellCount++;}
-                   if(grid[i+1][j+1] > 1){ cellCount++;}
-                   if(grid[i-1][j] > 1){ cellCount++;}
-                   if(grid[i][j-1] > 1){ cellCount++;}
-                   if(grid[i-1][j-1] > 1){ cellCount++;}
-                   if(grid[i+1][j-1] > 1){ cellCount++;}
-                   if(grid[i-1][j+1] > 1){ cellCount++;}
+                   if(grid[i+1][j] >= 1){ cellCount++;}
+                   if(grid[i][j+1] >= 1){ cellCount++;}
+                   if(grid[i+1][j+1] >= 1){ cellCount++;}
+                   if(grid[i-1][j] >= 1){ cellCount++;}
+                   if(grid[i][j-1] >= 1){ cellCount++;}
+                   if(grid[i-1][j-1] >= 1){ cellCount++;}
+                   if(grid[i+1][j-1] >= 1){ cellCount++;}
+                   if(grid[i-1][j+1] >= 1){ cellCount++;}
 
                    if(current == 0 && cellCount == 3){ nextGrid[i][j] = 1;}
                    else if(current == 1 && cellCount >= 2 && cellCount < 4){ nextGrid[i][j] = 1;}

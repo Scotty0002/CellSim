@@ -9,7 +9,7 @@ public class gui extends JFrame{
 
     public static final int HEIGHT = 900;
     public static final int WIDTH = 900;
-
+    private Main m = new Main();
     public int mx = 0;
     public int my = 0;
 
@@ -35,6 +35,9 @@ public class gui extends JFrame{
 
     }
 
+    public void setMain(Main newM){
+        this.m = newM;
+    }
     public Point mousePoint(){
         for(int i = 0; i<80; i++){
             for(int j = 0; j<80; j++){
@@ -97,7 +100,7 @@ public class gui extends JFrame{
             g.setColor(Color.BLACK);
             for(int i = 0; i<80; i++){
                 for(int j = 0; j<80; j++){
-                    if(Main.grid[i][j]>0) {
+                    if(m.grid[i][j]>0) {
                         g.fillRect(40 + (i * 10), 35 + (j * 10), 10, 10);
                     }
                         g.drawRect(40 + (i * 10), 35 + (j * 10), 10, 10);
